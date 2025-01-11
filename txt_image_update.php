@@ -1,6 +1,9 @@
 <?php
 include('functions.php');
 
+//ログインチェック
+check_session_id();
+
 //debug
 // echo "<pre>";
 // var_dump($_POST);

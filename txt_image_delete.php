@@ -5,6 +5,9 @@ $id = $_GET['id'];
 include('functions.php');
 $pdo = connect_to_db();
 
+//ログインチェック
+check_session_id();
+
 $sql = 'DELETE FROM todo_table_kadai WHERE id=:id';
 
 $stmt = $pdo->prepare($sql);

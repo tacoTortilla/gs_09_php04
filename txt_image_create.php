@@ -2,6 +2,9 @@
 
 include('functions.php');
 
+//ログインチェック
+check_session_id();
+
 // var_dump($_POST);
 // exit();
 

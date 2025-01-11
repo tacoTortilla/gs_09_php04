@@ -1,8 +1,14 @@
 <?php
 
+//セッション接続
+session_start();
+
 // DB接続
 include('functions.php');
 $pdo = connect_to_db();
+
+//ログインチェック
+check_session_id();
 
 // SQL作成&実行
 $sql = 'SELECT * FROM todo_table_kadai';
@@ -51,6 +57,12 @@ foreach ($result as $record) {
 
 }
 
+if ($_SESSION['is_admin'] === 1) {
+  $link = "<a href='admin.php'>管理者用</a>";
+} else{
+  $link = "";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,13 +71,15 @@ foreach ($result as $record) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SQL連携型todoリスト（一覧画面）</title>
+  <title>SQL連携型リスト（一覧画面）</title>
 </head>
 
 <body>
+  <?= $link ?>
   <fieldset>
-    <legend>SQL連携型todoリスト（一覧画面）</legend>
+    <legend>SQL連携型リスト（一覧画面）---  ログイン中：<?=$_SESSION['username']?> </legend>
     <a href="txt_image_input.php">入力画面</a>
+    <a href="logout.php">ログアウト</a>
     <table>
       <thead>
         <tr>
